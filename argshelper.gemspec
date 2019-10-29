@@ -10,6 +10,6 @@ Gem::Specification.new do |s|
 	s.homepage = 'https://rubygems.org/gems/argshelper'
 	s.license = 'MIT'
 
-	s.add_runtime_dependency('yard', '>=0.9.20')
+	s.add_runtime_dependency('yard', '~> 0.9', '>= 0.9.20')
 	s.metadata["yard.run"] = "yri"
 end
