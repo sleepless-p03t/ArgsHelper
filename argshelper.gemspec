@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name = 'argshelper'
-	s.version = '0.0.6'
+	s.version = '0.0.8'
 	s.date = Time.now.strftime('%Y-%m-%d')
 	s.summary = 'Command line arg aid'
 	s.description = 'A simple command line argument helper'
@@ -13,4 +13,3 @@ Gem::Specification.new do |s|
 	s.add_runtime_dependency('yard', '>=0.9.20')
 	s.metadata["yard.run"] = "yri"
 end
-

@@ -74,13 +74,14 @@ class ArgsHelper
 	end
 
 	# Add argument keys
-	# @param skey [Array] or [String] Short keys or short key
-	# @param lkey [Array] or [String] Long keys or long key
-	# @param kval [Array] or [String] Value description(s) or possible value(s)
-	# @param kdescription [Array] or [String] Key description(s)
+	# @param skey [Array, String] Short keys or short key
+	# @param lkey [Array, String] Long keys or long key
+	# @param kval [Array, String] Value description(s) or possible value(s)
+	# @param kdescription [Array, String] Key description(s)
 	def add_keys(skey = nil, lkey = nil, kval = nil, kdescription = nil)
-		arrays = [ skey.is_a?(Array), lkey.is_a?(Array), kval.is_a?(Array), kdescription.is_a?(Array) ]
-		strings = [ skey.is_a?(String), lkey.is_a?(String), kval.is_a?(String), kdescription.is_a?(String)]
+
+		arrays = [ skey.is_a?(Array) || skey == nil, lkey.is_a?(Array) || lkey == nil, kval.is_a?(Array) || kval == nil, kdescription.is_a?(Array) || kdescription == nil ]
+		strings = [ skey.is_a?(String) || skey == nil, lkey.is_a?(String) || lkey == nil, kval.is_a?(String) || kval == nil, kdescription.is_a?(String) || kdescription == nil ]
 
 		if arrays.include?(true) && arrays.include?(false)
 			puts "Mismatched types: Expected either Arrays or Strings"
@@ -201,9 +202,28 @@ class ArgsHelper
 	
 	# Returns whether a flag has been found
 	# @param flag [String] Short or long flag
+	# @return [Boolean] If argument passed from command line
 	def has_arg?(flag)
 		fp = @flag_pairs.get_value(flag)
 		return fp != nil && (@args.has_key?(flag) || @args.has_key?(fp))
+	end
+	
+	# Returns the value of a given flag
+	# @param flag [String] Short or long flag
+	# @return [String, nil] 
+	def get_value(flag)
+		fp = @flag_pairs.get_value(flag)
+		if !@no_vals.include?(flag)
+			if @args.has_key?(flag)
+				return @args[flag]
+			elsif @args.has_key?(fp) && fp != nil
+				return @args[fp]
+			else
+				return nil
+			end
+		else
+			return nil
+		end
 	end
 
 	# Display a help table

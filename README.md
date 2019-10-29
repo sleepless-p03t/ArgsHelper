@@ -16,6 +16,7 @@ sudo gem install argshelper --document=yri,yard
 ## Usage
 
 ```ruby
+require 'argshelper'
 
 # Define options
 
@@ -40,6 +41,9 @@ helper.parse_args
 
 # To check if a flag is used:
 puts helper.has_arg?('-c')
+
+# get value for flag
+puts helper.get_value('-c')
 
 # Display options in a table:
 # Default:
