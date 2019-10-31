@@ -166,14 +166,7 @@ class ArgsHelper
 	# Handles errors in flags and flag values
 	def parse_args
 		@args = @args_a.each_slice(2).to_a.inject({}) { |h, k| h[k[0]] = k[1]; h }
-		
-		if remove_keys(@no_vals).has_blank?
-			puts "Missing argument(s)"
-			exit
-		end			
-
 		keys = @skeys + @lkeys
-
 		@args.each do |k, v|
 			if !keys.include?(k)
 				puts "Unknown option `#{k}'"
@@ -198,13 +191,19 @@ class ArgsHelper
 				end
 			end
 		end
+		
+		if remove_keys(@no_vals).has_blank?
+			puts "Missing argument(s)"
+			exit
+		end			
 	end
 	
 	# Returns whether a flag has been found
 	# @param flag [String] Short or long flag
 	# @return [Boolean] If argument passed from command line
 	def has_arg?(flag)
-		return (@args.has_key?(flag) || @args.has_key?(flag))
+		fp = @flag_pairs.get_value(flag)
+		return fp != nil && (@args_a.include?(flag) || @args_a.include?(fp))
 	end
 	
 	# Returns the value of a given flag
