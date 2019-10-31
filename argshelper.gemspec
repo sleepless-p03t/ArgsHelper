@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name = 'argshelper'
-	s.version = '0.0.8'
+	s.version = '0.0.9'
 	s.date = Time.now.strftime('%Y-%m-%d')
 	s.summary = 'Command line arg aid'
 	s.description = 'A simple command line argument helper'

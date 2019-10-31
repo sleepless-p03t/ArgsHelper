@@ -204,8 +204,7 @@ class ArgsHelper
 	# @param flag [String] Short or long flag
 	# @return [Boolean] If argument passed from command line
 	def has_arg?(flag)
-		fp = @flag_pairs.get_value(flag)
-		return fp != nil && (@args.has_key?(flag) || @args.has_key?(fp))
+		return (@args.has_key?(flag) || @args.has_key?(fp))
 	end
 	
 	# Returns the value of a given flag
